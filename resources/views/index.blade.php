@@ -32,16 +32,17 @@
             <h4 class="text-primary">Your Loans</h4>
             </div>
             <br/>
-         <form class="p-3">
+         <form class="p-3" method="POST" action="{{route('login')}}">
+            @csrf
            <label>Email</label>
            <br/>
-           <input type="email" class="form-control" placeholder="Enter Email">
+           <input type="email" class="form-control" placeholder="Enter Email" name="email">
            <br/>
            <label>Password</label>
            <br/>
-           <input type="password" class="form-control" placeholder="Enter Password">
+           <input type="password" class="form-control" placeholder="Enter Password" name="password">
            <br/>
-           <button style="background-color:#041854; color: #fff;"  class="form-control btn btn-default">Login</button>
+           <button type="submit" style="background-color:#041854; color: #fff;"  class="form-control btn btn-default">Login</button>
    
          </form>
         </div>

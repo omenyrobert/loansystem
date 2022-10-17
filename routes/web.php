@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,8 @@ use App\Http\Controllers\PaymentsController;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::post('/login',[LoginController::class,'login'])->name('login');
 
 // clients routes
 Route::prefix('clients')->group(function(){

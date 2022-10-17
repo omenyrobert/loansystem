@@ -276,17 +276,18 @@
                                                         <label>Number Plate</label>
                                                         <input type="text" name="number_plate"
                                                             class="form-control mt-2"
-                                                            placeholder="Enter First Contacts" required>
+                                                            placeholder="Enter Number Plate" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="m-2">
                                                         <label>Type of loan</label>
-                                                        <select type="text" name="type_of_loan"
+                                                        <select type="text" name="loan_type_id"
                                                             class="form-control mt-2">
                                                             <option selected disabled>--select type of loan--</option>
-                                                            <option value="loan">Bike loan</option>
-                                                            <option value="other">other</option>
+                                                            @foreach($loan_types as $loan_type)
+                                                            <option value="{{$loan_type->id}}">{{$loan_type->type}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
 

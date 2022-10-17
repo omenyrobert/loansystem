@@ -48,16 +48,14 @@ class ClientController extends Controller
 
         if ($request->has('photo')) {
             $photo = $request->file('photo');
-            $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $photo->getClientOriginalExtension();
-            $photo->move($destinationPath, $profileImage);
-            $input['photo'] = "$profileImage";
+            $photo->move(public_path('upload/user'), $profileImage);
+            $input['photo'] = 'upload/user'.$profileImage;
         }
         if ($contract = $request->file('contract')) {
-            $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $contract->getClientOriginalExtension();
-            $contract->move($destinationPath, $profileImage);
-            $input['contract'] = "$profileImage";
+            $contract->move(public_path('upload/contract'), $profileImage);
+            $input['contract'] = 'upload/contract'.$profileImage;
         }
      
         Client::create($input);

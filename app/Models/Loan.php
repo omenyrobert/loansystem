@@ -16,8 +16,10 @@ class Loan extends Model
         'type_of_bike',	
         'amount',	
         'number_plate',	
-        'type_of_loan',	
+        'loan_type_id',	
         'loan_duration',	
+        'amount_paid',
+        'balance',
         'reason',
     ];
 

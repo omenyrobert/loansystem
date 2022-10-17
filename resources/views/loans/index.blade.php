@@ -139,8 +139,7 @@
                                                        <form action="{{ route('payment.store') }}" method="POST">
                                                            @csrf
                                                            <div class="modal-header bg-primary">
-                                                               <h5 class="modal-title text-white" id="exampleModalLabel">Enter missed
-                                                                   Payment</h5>
+                                                               <h5 class="modal-title text-white" id="exampleModalLabel">Enter Missed Payment</h5>
                                                                <button type="button" class="btn-close"
                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                                            </div>
@@ -153,20 +152,12 @@
                                                                <input type="number" class="form-control"
                                                                    placeholder="Enter Amount" name="amount">
                                                                <br />
-                                                               <select name="type_id" class="form-control">
-                                                                   <option selected disabled>--select Payment Type--
-                                                                   </option>
-                                                                   @foreach ($payment_types as $payment_type)
-                                                                       <option value="{{ $payment_type->id }}">
-                                                                           {{ $payment_type->type }}</option>
-                                                                   @endforeach
-                                                               </select>
+                                                             
                                                            </div>
                                                            <div class="modal-footer">
                                                                <button type="button" class="btn btn-secondary"
                                                                    data-bs-dismiss="modal">Close</button>
-                                                               <button type="submit" class="btn btn-primary">Add
-                                                                   Payment</button>
+                                                               <button type="submit" class="btn btn-primary">Add Missed Payment</button>
                                                            </div>
                                                        </form>
                                                    </div>
@@ -191,24 +182,20 @@
                                                            <h3 class="text-primary">{{ $loan->client->full_name }}
                                                            </h3>
                                                            <br />
+                                                           <label>Amount</label>
                                                            <input type="hidden" name="client_id"
                                                                value="{{ $loan->client->id }}">
                                                            <input type="number" class="form-control"
                                                                placeholder="Enter Amount" name="amount">
                                                            <br />
-                                                           <select name="type_id" class="form-control">
-                                                               <option selected disabled>--select Payment Type--
-                                                               </option>
-                                                               @foreach ($payment_types as $payment_type)
-                                                                   <option value="{{ $payment_type->id }}">
-                                                                       {{ $payment_type->type }}</option>
-                                                               @endforeach
-                                                           </select>
+                                                           <label>Date</label>
+                                                           <input type="date" class="form-control" name="date">
+                                                          
                                                        </div>
                                                        <div class="modal-footer">
                                                            <button type="button" class="btn btn-secondary"
                                                                data-bs-dismiss="modal">Close</button>
-                                                           <button type="submit" class="btn btn-primary">Add
+                                                           <button type="submit" class="btn btn-primary">Reschedule
                                                                Payment</button>
                                                        </div>
                                                    </form>

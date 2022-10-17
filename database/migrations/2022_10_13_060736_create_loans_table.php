@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('number_plate');
             $table->integer('loan_type_id');
             $table->string('loan_duration');
-            $table->bigInteger('amount_paid');
-            $table->bigInteger('balance');
+            $table->bigInteger('amount_paid')->nullable();
+            $table->bigInteger('balance')->nullable();
             $table->string('reason');
             $table->timestamps();
         });

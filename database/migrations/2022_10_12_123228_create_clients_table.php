@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('date_of_birth');
             $table->string('contact1');
             $table->string('contact2');
-            $table->string('photo');
-            $table->string('contract');
+            $table->string('photo')->nullable();
+            $table->string('contract')->nullable();
             $table->string('place_of_residence');
             $table->string('guarantee_name');
             $table->string('guarantee_contact');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\PaymentType;
 use App\Models\Loan;
+use App\Models\LoanType;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -19,8 +20,9 @@ class LoanController extends Controller
         $loans = Loan::with('client:id,full_name')->latest()->paginate(5);
         $clients = Client::all(['id','full_name']);
         $payment_types = PaymentType::all(['id','type']);
+        $loan_types = LoanType::all(['id','type']);
         // dd($clients);
-        return view('loans.index',compact('loans','clients','payment_types'))
+        return view('loans.index',compact('loans','clients','payment_types','loan_types'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

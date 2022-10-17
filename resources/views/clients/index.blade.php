@@ -43,7 +43,7 @@
                                     <td>{{ $client->place_of_residence }}</td>
                                     <td>{{ $client->contact1 }}</td>
                                                                        
-                                    <td><img src="/images/{{ $client->image }}" width="100px"></td>
+                                    <td><img src="{{ asset($client->image) }}" width="100px"></td>
                                     <td>{{ $client->boda_stage }}</td>
                                     <td><div class="d-flex">{{ $client->spouse_name }}  <p style="color: #008ad3; margin-left: 10px;">{{ $client->spouse_contact }}</p></div></td>
                                     <td><div class="d-flex">{{ $client->guarantee_name }} <p style="color: #008ad3; margin-left: 10px;"> {{ $client->guarantee_contact }}</p></div></td>

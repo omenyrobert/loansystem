@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('type_of_bike');
             $table->string('amount');
             $table->string('number_plate');
-            $table->string('type_of_loan');
+            $table->integer('loan_type_id');
             $table->string('loan_duration');
+            $table->bigInteger('amount_paid');
+            $table->bigInteger('balance');
             $table->string('reason');
             $table->timestamps();
         });

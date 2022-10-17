@@ -39,7 +39,7 @@
 </a>
 <a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-people"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Clients</p>
+        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Daily Reports</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
@@ -47,7 +47,23 @@
 </a>
 <a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-people"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Clients</p>
+        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Missed Payments</p>
+    </div>
+    <div>
+    <i  class="bi bi-arrow-right"></i>
+    </div>
+</a>
+<a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+    <div class="d-flex">
+        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Fine Payments</p>
+    </div>
+    <div>
+    <i  class="bi bi-arrow-right"></i>
+    </div>
+</a>
+<a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+    <div class="d-flex">
+        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Rescheduled</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>

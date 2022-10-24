@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\payments;
+use App\Models\Loan;
+use App\Models\Payments;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
@@ -40,15 +41,26 @@ class PaymentsController extends Controller
             //
             $request->validate([
                 'client_id'=>'required',	
-                'amount'=> 'required',
-                'amount'=>'required',	
+                'amount'=> 'required',	
                 'type_id'=> 'required',	
             ]);
-            $input = $request->all();
-            Payments::create($input);
-          
+            if($request->type_id == 3){
+                $loan = Loan::find($request->loan_id);
+                $balance = $loan->amount - $request->amount;
+                $loan->update([
+                    'amount_paid' => $request->amount,
+                    'balance' => $balance
+                ]);
+                $input = $request->all();
+                Payments::create($input);
+              
+                return redirect()->route('loan.index')
+                                ->with(['success' => 'Payments created successfully.']);
+            }
+            $other = $request->all();
+            Payments::create($other);
             return redirect()->route('loan.index')
-                            ->with(['success' => 'Payments created successfully.']);
+            ->with(['success' => 'Payments created successfully.']);
         }
     }
 

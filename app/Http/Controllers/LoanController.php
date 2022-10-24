@@ -17,7 +17,7 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loans = Loan::with('client:id,full_name')->latest()->paginate(5);
+        $loans = Loan::with('client:id,full_name','loan_type:id,type')->latest()->paginate(5);
         $clients = Client::all(['id','full_name']);
         $payment_types = PaymentType::all(['id','type']);
         $loan_types = LoanType::all(['id','type']);

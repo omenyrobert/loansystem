@@ -64,10 +64,10 @@
                                             <td class="tab-font">{{ ++$i }}</td>
                                             <td class="tab-font">{{ $loan->client->full_name }}</td>
                                             <td class="tab-font">{{ $loan->amount }}</td>
-                                            <td class="tab-font">{{ $loan->amount }}</td>
-                                            <td class="tab-font">{{ $loan->amount }}</td>
+                                            <td class="tab-font">{{ $loan->amount_paid }}</td>
+                                            <td class="tab-font">{{ $loan->balance }}</td>
                                             <td class="tab-font">{{ $loan->type_of_bike }}</td>
-                                            <td class="tab-font">{{ $loan->type_of_loan }}</td>
+                                            <td class="tab-font">{{ $loan->loan_type->type }}</td>
                                             <td class="tab-font">
                                                 <div class="d-flex"> <a href="{{ route('loan.edit', $loan->id) }}"><i
                                                             class="bi bi-pencil m-1 text-warning"></i> </a>
@@ -110,6 +110,7 @@
                                                                 <input type="number" class="form-control"
                                                                     placeholder="Enter Amount" name="amount">
                                                                 <br />
+                                                                <input type="hidden" value="{{$loan->id}}" name="loan_id">
                                                                 <select name="type_id" class="form-control">
                                                                     <option selected disabled>--select Payment Type--
                                                                     </option>
@@ -150,8 +151,10 @@
                                                                <input type="hidden" name="client_id"
                                                                    value="{{ $loan->client->id }}">
                                                                <input type="number" class="form-control"
-                                                                   placeholder="Enter Amount" name="amount">
+                                                                   placeholder="Enter Amount" name="amount" required>
                                                                <br />
+                                                               <input type="hidden" value="1" name="type_id">
+                                                               <input type="hidden" value="{{$loan->id}}" name="loan_id">
                                                              
                                                            </div>
                                                            <div class="modal-footer">
@@ -190,6 +193,8 @@
                                                            <br />
                                                            <label>Date</label>
                                                            <input type="date" class="form-control" name="date">
+                                                           <input type="hidden" value="2" name="type_id">
+                                                           <input type="hidden" value="{{$loan->id}}" name="loan_id">
                                                           
                                                        </div>
                                                        <div class="modal-footer">

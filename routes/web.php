@@ -51,3 +51,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+Route::get('/daily-reports', function () {
+    return view('dailyReports');
+});
+
+Route::get('/missed-payments', function () {
+    return view('MissedPayments');
+});
+
+Route::get('/fine-payments', function () {
+    return view('FinePayments');
+});
+
+Route::get('/rescheduled-payments', function () {
+    return view('RescheduledPayments');
+});
+

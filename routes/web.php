@@ -43,11 +43,17 @@ Route::prefix('loans')->group(function(){
 });
 Route::prefix('payment')->group(function(){
     Route::post('/store', [PaymentsController::class, 'store'])->name('payment.store');
+    Route::get('/all',[PaymentsController::class,'index'])->name('payment.all');
+    Route::post('/generate',[PaymentsController::class,'generate'])->name('payment.generate');
+    Route::get('/daily-reports',[PaymentsController::class, 'today'])->name('payment.today');
+    Route::get('/missed-payments',[PaymentsController::class,'missed_payments'])->name('payment.missed');
+    Route::get('/fine-payments',[PaymentsController::class,'fine_payments'])->name('payment.fine');
+    Route::get('/reschedule-payments',[PaymentsController::class ,'reschedule_payments'])->name('payment.reschedule');
 });
 
 // end of clients routes
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->name('dashboard');
 

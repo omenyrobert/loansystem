@@ -37,33 +37,41 @@
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+<a href="{{ route('payment.all') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Daily Reports</p>
+        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">All Payments</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+<a href="{{ route('payment.today') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Missed Payments</p>
+        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">All Today Payments</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+<a href="{{ route('payment.missed') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Fine Payments</p>
+        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Missed Payments Today</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+<a href="{{ route('payment.fine') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Rescheduled</p>
+        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Fine Payments Today</p>
+    </div>
+    <div>
+    <i  class="bi bi-arrow-right"></i>
+    </div>
+</a>
+<a href="{{ route('payment.reschedule') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+    <div class="d-flex">
+        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Rescheduled Today</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>

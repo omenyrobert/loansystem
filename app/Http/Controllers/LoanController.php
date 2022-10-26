@@ -52,8 +52,16 @@ class LoanController extends Controller
             'amount'=>'required',	
             'number_plate'=> 'required',	
         ]);
-        $input = $request->all();
-        Loan::create($input);
+        Loan::create([
+            'client_id' => $request->client_id,
+            'type_of_bike' => $request->type_of_bike,
+            'amount' => $request->amount,
+            'balance' => $request->amount,
+            'reason' => $request->reason,
+            'number_plate' => $request->number_plate,
+            'loan_type_id' => $request->loan_type_id,
+            'loan_duration' => $request->loan_duration
+        ]);
       
         return redirect()->route('loan.index')
                         ->with(['success' => 'Loan created successfully.']);

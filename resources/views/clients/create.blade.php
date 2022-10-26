@@ -21,7 +21,7 @@
                 @include('layouts.sidebar')
             </div>
             <div class="col-md-10">
-                @include('layouts.cards')
+                {{-- @include('layouts.cards') --}}
                 <div class="bg-white p-3 mt-2 shadow overflow-auto" style="border-radius: 15px; height: 80vh;">
 
                     <h3 style="color: #008ad3; ">Clients</h3>
@@ -46,11 +46,11 @@
                                 </div>
                                 <div class="m-4">
                                     <label>Date of Birth</label>
-                                    <input type="date" name="date_of_birth" class="form-control mt-2" placeholder="date of birth">
+                                    <input type="date" name="date_of_birth" class="form-control mt-2" placeholder="date of birth" required>
                                 </div>
                                 <div class="m-4">
                                     <label>Place of Residence</label>
-                                    <input type="text" class="form-control mt-2" name="place_of_residence" placeholder="Enter Place of Residence">
+                                    <input type="text" class="form-control mt-2" name="place_of_residence" placeholder="Enter Place of Residence" required>
                                 </div>
 
                                
@@ -62,7 +62,7 @@
 
                                 <div class="m-4">
                                     <label>Second Contact</label>
-                                    <input type="text" name="contact2" class="form-control mt-2" placeholder="Enter Second Contact">
+                                    <input type="text" name="contact2" class="form-control mt-2" placeholder="Enter Second Contact" required>
                                 </div>
 
                                 <div class="m-4">
@@ -79,27 +79,27 @@
                             <div class="col-md-6">
                                 <div class="m-4">
                                     <label>Boda Stage</label>
-                                    <input type="text" name="boda_stage" class="form-control mt-2" placeholder="Enter Boda Stage">
+                                    <input type="text" name="boda_stage" class="form-control mt-2" placeholder="Enter Boda Stage" required>
                                 </div>
 
                                 <div class="m-4">
                                     <label>Guarantee Name</label>
-                                    <input type="text" class="form-control mt-2" name="guarantee_name" placeholder="Enter First Guarantee Name">
+                                    <input type="text" class="form-control mt-2" name="guarantee_name" placeholder="Enter First Guarantee Name" required>
                                 </div>
 
                                 <div class="m-4">
                                     <label>Guarantee Contact</label>
-                                    <input type="text" class="form-control mt-2" name="guarantee_contact" placeholder="Enter First Guarantee Contact">
+                                    <input type="text" class="form-control mt-2" name="guarantee_contact" placeholder="Enter First Guarantee Contact" required>
                                 </div>
                                
                                 <div class="m-4">
                                     <label>Spouse Name</label>
-                                    <input type="text" class="form-control mt-2" name="spouse_name" placeholder="Enter Spouse Name">
+                                    <input type="text" class="form-control mt-2" name="spouse_name" placeholder="Enter Spouse Name" required>
                                 </div>
 
                                 <div class="m-4">
                                     <label>Spouse Contact</label>
-                                    <input type="text" class="form-control mt-2" name="spouse_contact" placeholder="Enter spouse Contact">
+                                    <input type="text" class="form-control mt-2" name="spouse_contact" placeholder="Enter spouse Contact" required>
                                 </div>
                                 <div class="m-4">
                                     <button type="submit" class="btn btn-primary form-control">Register</button>

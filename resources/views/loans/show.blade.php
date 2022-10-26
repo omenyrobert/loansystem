@@ -21,10 +21,10 @@
                 @include('layouts.sidebar')
             </div>
             <div class="col-md-10">
-                @include('layouts.cards')
+                {{-- @include('layouts.cards') --}}
                 <div class="bg-white p-3 mt-2 shadow overflow-auto" style="border-radius: 15px; height: 80vh;">
 
-                    <h3 style="color: #008ad3; ">loans</h3>
+                    <h3 style="color: #008ad3; ">Loans</h3>
                     <a href="{{ url('/loans') }}" class="text-decoration-none btn btn-primary">Back</a>
                         <div class="row mt-5 p-1">
                             <div class="col-md-4">
@@ -36,9 +36,9 @@
                                 <div class="m-4">
                                      
                                     <br/>
-                                    <h4 style="color: #05165b; "> {{ $loan->amount }}</h4>
-                                    <h6 style="color: #008ad3; "> {{ $loan->amount }}</h6>
-                                    <p style="color: #008ad3; "> {{ $loan->amount }}</p>
+                                    <h4 style="color: #05165b; "> Loan Amount: {{ $loan->amount }}</h4>
+                                    <h6 style="color: #008ad3; "> Balance: {{ $loan->amount }}</h6>
+                                    {{-- <p style="color: #008ad3; "> {{ $loan->amount }}</p> --}}
                                 </div>
                                 <div class="m-4">
                                     <label>Type of Bike</label><br/>
@@ -46,13 +46,13 @@
                                 </div>
                                 <div class="m-4">
                                     <label>Type of Loan</label><br/>
-                                    <p class="text-primary">{{ $loan->type_of_loan }}</p>
+                                    <p class="text-primary">{{ $loan->loan_type->type }}</p>
                                     
                                 </div>
 
                                 <div class="m-4">
                                     <label>Reason</label><br/>
-                                    <p class="text-primary">{{ $loan->contact1 }}</p>
+                                    <p class="text-primary">{{ $loan->reason }}</p>
                                    
                                 </div>
 
@@ -64,40 +64,25 @@
                                 <h5 class="text-primary">Loan Payment History</h5>
                                 <table class="table mt-3">
                                     <thead style="background-color: #bbd0d750; color: #008ad3;">
-                                     <th style="font-size: 13px;">Type of Loan</th> <th style="font-size: 13px;">Amount </th><th style="font-size: 13px;">Time</th><th style="font-size: 13px;">date</th><th style="font-size: 13px;">Balance</th>
+                                     <th style="font-size: 13px;">Type of Payment</th> 
+                                     <th style="font-size: 13px;">Amount(UGX) </th>
+                                     <th style="font-size: 13px;">Time</th>
+                                     <th style="font-size: 13px;">date</th>
                                     </thead>
                                     <tbody>
+                                        @foreach ($loan_payments as $item)
                                         <tr>
-                                            <td style="font-size: 13px;">other</td><td style="font-size: 13px;">20,000</td><td style="font-size: 13px;">10:00pm</td><td style="font-size: 13px;">20-10-2022</td><td style="font-size: 13px;">4,500,000</td>
+                                            <td style="font-size: 13px;">{{$item->type->type}}</td>
+                                            <td style="font-size: 13px;">{{number_format($item->amount)}}</td>
+                                            <td style="font-size: 13px;">{{$item->created_at->format('h:i A')}}</td>
+                                            <td style="font-size: 13px;">{{$item->created_at->format('d-m-Y')}}</td>
                                         </tr>
-                                        <tr>
-                                            <td style="font-size: 13px;">Motor Bike</td><td style="font-size: 13px;">20,000</td><td style="font-size: 13px;">10:00pm</td><td style="font-size: 13px;">20-10-2022</td><td style="font-size: 13px;">4,500,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 13px;">other</td><td style="font-size: 13px;">20,000</td><td style="font-size: 13px;">10:00pm</td><td style="font-size: 13px;">20-10-2022</td><td style="font-size: 13px;">4,500,000</td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
-                              {{-- </div> --}}
-                              {{-- <div class="m-2">
-                                <h5 class="text-primary">Missed Payments</h5>
-                                <table class="table mt-3">
-                                    <thead style="background-color: #bbd0d750; color: #008ad3;">
-                                     <th style="font-size: 13px;">Type of Loan</th> <th style="font-size: 13px;">Amount </th><th style="font-size: 13px;">Time</th><th style="font-size: 13px;">date</th><th style="font-size: 13px;">Balance</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="font-size: 13px;">other</td><td style="font-size: 13px;">20,000</td><td style="font-size: 13px;">10:00pm</td><td style="font-size: 13px;">20-10-2022</td><td style="font-size: 13px;">4,500,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 13px;">Motor Bike</td><td style="font-size: 13px;">20,000</td><td style="font-size: 13px;">10:00pm</td><td style="font-size: 13px;">20-10-2022</td><td style="font-size: 13px;">4,500,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 13px;">other</td><td style="font-size: 13px;">20,000</td><td style="font-size: 13px;">10:00pm</td><td style="font-size: 13px;">20-10-2022</td><td style="font-size: 13px;">4,500,000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                              </div> --}}
+                                @if (count($loan_payments) == 0)
+                                    <p>No Payment Made</p>
+                                @endif
                             </div>
 
                         </div>

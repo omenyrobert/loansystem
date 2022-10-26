@@ -21,7 +21,7 @@
                 @include('layouts.sidebar')
             </div>
             <div class="col-md-10">
-                @include('layouts.cards')
+                {{-- @include('layouts.cards') --}}
                 <div class="bg-white p-3 mt-2 shadow overflow-auto" style="border-radius: 15px; height: 80vh;">
 
                     <h3 style="color: #008ad3; ">Clients</h3>

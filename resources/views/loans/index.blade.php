@@ -26,10 +26,10 @@
                 @include('layouts.sidebar')
             </div>
             <div class="col-md-10">
-                @include('layouts.cards')
+                {{-- @include('layouts.cards') --}}
                 <div class="bg-white p-3 mt-2 shadow overflow-auto" style="border-radius: 15px; height: 80vh;">
                     <div class="d-flex" style="justify-content: space-between">
-                        <h3 style="color: #008ad3; ">loans</h3>
+                        <h3 style="color: #008ad3; ">Loans</h3>
                         <h4 data-bs-toggle="modal" data-bs-target="#addloan" role="button" style="color: #008ad3; ">Add
                             Loan</h4>
                     </div>
@@ -51,9 +51,9 @@
                                 <thead style="background-color: #bbd0d750; color: #008ad3;">
                                     <th class="tab-font">No</th>
                                     <th class="tab-font">Full Name</th>
-                                    <th class="tab-font">Amount Borrowed</th>
-                                    <th class="tab-font">Paid</th>
-                                    <th class="tab-font">Balance</th>
+                                    <th class="tab-font">Amount Borrowed(UGX)</th>
+                                    <th class="tab-font">Paid(UGX)</th>
+                                    <th class="tab-font">Balance(UGX)</th>
                                     <th class="tab-font">Type of Bike</th>
                                     <th class="tab-font">Type Of Loan</th>
                                     <th class="tab-font">Action</th>
@@ -63,24 +63,29 @@
                                         <tr>
                                             <td class="tab-font">{{ ++$i }}</td>
                                             <td class="tab-font">{{ $loan->client->full_name }}</td>
-                                            <td class="tab-font">{{ $loan->amount }}</td>
-                                            <td class="tab-font">{{ $loan->amount_paid }}</td>
-                                            <td class="tab-font">{{ $loan->balance }}</td>
+                                            <td class="tab-font">{{ number_format($loan->amount) }}</td>
+                                            <td class="tab-font">{{ number_format($loan->amount_paid) }}</td>
+                                            <td class="tab-font">{{ number_format($loan->balance) }}</td>
                                             <td class="tab-font">{{ $loan->type_of_bike }}</td>
                                             <td class="tab-font">{{ $loan->loan_type->type }}</td>
                                             <td class="tab-font">
                                                 <div class="d-flex"> <a href="{{ route('loan.edit', $loan->id) }}"><i
                                                             class="bi bi-pencil m-1 text-warning"></i> </a>
-                                                    <form action="{{ route('loan.destroy', $loan->id) }}"
+                                                    {{-- <form action="{{ route('loan.destroy', $loan->id) }}"
                                                         method="POST">
                                                         @csrf<button type="submit" style="margin-top: -5px;"
                                                             class="btn btn-default"> <i
                                                                 class="bi bi-trash-fill m-1 text-danger"></i></button>
-                                                    </form>
+                                                    </form> --}}
                                                     <a href="{{ route('loan.show', $loan->id) }}"> <i
                                                             class="bi bi-eye-fill m-1 text-primary"></i></a>
+                                                    @if ($loan->balance > 0)
                                                     <p style="margin-left: 20px;" class="text-success" role="button"
-                                                        data-bs-toggle="modal" data-bs-target="#pay">Pay</p>
+                                                    data-bs-toggle="modal" data-bs-target="#pay">Pay</p>
+                                                    @else
+                                                    <p style="margin-left: 20px;" class="text-success" role="button"
+                                                    >Cleared</p>
+                                                    @endif
                                                     <p style="margin-left: 20px;" data-bs-toggle="modal" data-bs-target="#missed" class="text-info" role="button">
                                                         Missed</p>
                                                     <p style="margin-left: 20px;" class="text-primary" data-bs-toggle="modal" data-bs-target="#resc" role="button">
@@ -191,12 +196,13 @@
                                                            <input type="number" class="form-control"
                                                                placeholder="Enter Amount" name="amount">
                                                            <br />
-                                                           <label>Date</label>
-                                                           <input type="date" class="form-control" name="date">
+                                                           <label>Date to Pay</label>
+                                                           <input type="date" class="form-control" name="reschedule_date" required>
                                                            <input type="hidden" value="2" name="type_id">
                                                            <input type="hidden" value="{{$loan->id}}" name="loan_id">
                                                           
                                                        </div>
+                                                       <input type="hidden" name="type_id" value="2" name="type_id">
                                                        <div class="modal-footer">
                                                            <button type="button" class="btn btn-secondary"
                                                                data-bs-dismiss="modal">Close</button>
@@ -217,6 +223,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if (count($loans) == 0)
+                                <p>No Loan recorded</p>
+                            @endif
 
                         </div>
                         <div class="modal fade" id="addloan" tabindex="-1" aria-labelledby="exampleModalLabel"

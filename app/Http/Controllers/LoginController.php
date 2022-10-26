@@ -20,7 +20,7 @@ class LoginController extends Controller
 
         if(!is_null($user) && Hash::check($request->password, $user->password)){
             auth()->attempt(['email' => $request->email, 'password' => $request->password]);
-            return redirect()->route('client.index')->with(['success'=>'Login Successfull']);
+            return redirect()->route('dashboard');
         }
     }
 }

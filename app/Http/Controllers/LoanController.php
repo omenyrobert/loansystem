@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\PaymentType;
 use App\Models\Loan;
 use App\Models\LoanType;
+use App\Models\Payments;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -66,8 +67,9 @@ class LoanController extends Controller
      */
     public function show($id)
     {
-        $loan = Loan::with('client:id,full_name')->where('id',$id)->first();
-        return view('loans.show',compact('loan'));
+        $loan = Loan::with(['client:id,full_name','loan_type'])->where('id',$id)->first();
+        $loan_payments = Payments::with('type')->where('loan_id',$loan->id)->get();
+        return view('loans.show',compact('loan','loan_payments'));
     }
 
     /**

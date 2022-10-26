@@ -17,4 +17,8 @@ class payments extends Model
         'client_id',
         'loan_id'
     ];
+
+    public function type(){
+        return $this->belongsTo(PaymentType::class,'type_id');
+    }
 }

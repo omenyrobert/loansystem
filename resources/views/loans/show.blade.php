@@ -59,9 +59,9 @@
 
 
                             </div>
-                            <div class="col-md-8 d-flex">
-                              <div class="m-2">
-                                <h5 class="text-primary">Payment history</h5>
+                            <div class="col-md-8">
+                              {{-- <div class="m-2"> --}}
+                                <h5 class="text-primary">Loan Payment History</h5>
                                 <table class="table mt-3">
                                     <thead style="background-color: #bbd0d750; color: #008ad3;">
                                      <th style="font-size: 13px;">Type of Loan</th> <th style="font-size: 13px;">Amount </th><th style="font-size: 13px;">Time</th><th style="font-size: 13px;">date</th><th style="font-size: 13px;">Balance</th>
@@ -78,8 +78,8 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                              </div>
-                              <div class="m-2">
+                              {{-- </div> --}}
+                              {{-- <div class="m-2">
                                 <h5 class="text-primary">Missed Payments</h5>
                                 <table class="table mt-3">
                                     <thead style="background-color: #bbd0d750; color: #008ad3;">
@@ -97,7 +97,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                              </div>
+                              </div> --}}
                             </div>
 
                         </div>

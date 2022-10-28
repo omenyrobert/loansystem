@@ -33,17 +33,25 @@
                      @endif
                          <table class="table mt-3">
                             <thead style="background-color: #bbd0d750; color: #008ad3;">
-                              <th>No</th><th>Full Name</th><th>Place of Residence</th><th>Contact</th><th>Image</th><th>Border stage</th><th>Spouse</th><th>Guarantee</th><th>Action</th>
+                              <th>No</th>
+                              <th>Image</th>
+                              <th>Full Name</th>
+                              <th>Place of Residence</th>
+                              <th>Contact</th>
+                              <th>Border stage</th>
+                              <th>Spouse</th>
+                              <th>Guarantee</th>
+                              <th>Action</th>
                             </thead>
                             <tbody>
                                 @foreach ($clients as $client)
                                 <tr>
                                     <td>{{ ++$i }}</td>
+                                    <td><img src="{{ !is_null($client->photo) ? asset($client->photo) : asset('upload/user/placeholder.png') }}" width="100px" height="100px" style="border-radius: 5px"></td>
                                     <td>{{ $client->full_name }}</td>
                                     <td>{{ $client->place_of_residence }}</td>
                                     <td>{{ $client->contact1 }}</td>
                                                                        
-                                    <td><img src="{{ asset($client->image) }}" width="100px"></td>
                                     <td>{{ $client->boda_stage }}</td>
                                     <td><div class="d-flex">{{ $client->spouse_name }}  <p style="color: #008ad3; margin-left: 10px;">{{ $client->spouse_contact }}</p></div></td>
                                     <td><div class="d-flex">{{ $client->guarantee_name }} <p style="color: #008ad3; margin-left: 10px;"> {{ $client->guarantee_contact }}</p></div></td>

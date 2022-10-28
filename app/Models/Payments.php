@@ -16,7 +16,8 @@ class payments extends Model
         'amount',
         'client_id',
         'loan_id',
-        'reschedule_date'
+        'reschedule_date',
+        'cleared'
     ];
 
     public function type(){

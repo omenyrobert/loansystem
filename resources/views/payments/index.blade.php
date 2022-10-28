@@ -71,7 +71,7 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>{{$payment->client->full_name}}</td>
-                                        <td>{{ $payment->amount }}</td>
+                                        <td>{{ number_format($payment->amount) }}</td>
                                         <td>{{ $payment->type->type }}</td>                          
                                         <td>{{ \App\Models\LoanType::find($payment->loan->loan_type_id)->type }}</td>
                                         <td>{{ $payment->created_at->format('h:i A') }}</td>

@@ -47,8 +47,10 @@ Route::prefix('payment')->group(function(){
     Route::post('/generate',[PaymentsController::class,'generate'])->name('payment.generate');
     Route::get('/daily-reports',[PaymentsController::class, 'today'])->name('payment.today');
     Route::get('/missed-payments',[PaymentsController::class,'missed_payments'])->name('payment.missed');
+    Route::get('/normal-payments',[PaymentsController::class,'normal_payments'])->name('payment.normal');
     Route::get('/fine-payments',[PaymentsController::class,'fine_payments'])->name('payment.fine');
     Route::get('/reschedule-payments',[PaymentsController::class ,'reschedule_payments'])->name('payment.reschedule');
+    Route::post('/clear-payment',[PaymentsController::class,'clear_payment'])->name('payment.clear');
 });
 
 // end of clients routes

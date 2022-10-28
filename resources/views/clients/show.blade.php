@@ -29,8 +29,8 @@
                         <div class="row mt-5 p-1">
                             <div class="col-md-6">
                                 <div class="m-4">
-                                    <label>Photo</label>
-                                    {{ $client->date_of_birth }}
+                                    {{-- <label>Photo</label> --}}
+                                    <img src="{{ !is_null($client->photo) ? asset($client->photo) : asset('upload/user/placeholder.png') }}" width="100px" height="100px" style="border-radius: 5px">
                                     {{-- <input type="file" class="form-control mt-2" name="photo" placeholder="Photo"> --}}
                                 </div>
                                 <div class="m-4">

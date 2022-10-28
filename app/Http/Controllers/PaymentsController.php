@@ -76,31 +76,43 @@ class PaymentsController extends Controller
             if($request->type_id == 3){
                 $loan = Loan::find($request->loan_id);
                 $balance = $loan->amount - $request->amount;
+                $paid = $loan->amount_paid + $request->amount;
                 $loan->update([
-                    'amount_paid' => $request->amount,
+                    'amount_paid' => $paid,
                     'balance' => $balance
                 ]);
-                $input = $request->all();
-                Payments::create($input);
+                // $input = $request->all();
+                Payments::create([
+                    'client_id' => $request->client_id,
+                    'amount' => $request->amount,
+                    'type_id' => $request->type_id,
+                    'cleared' => 1,
+                    'loan_id' => $request->loan_id
+                ]);
                 
                 return redirect()->route('loan.index')
                 ->with(['success' => 'Payments created successfully.']);
             }
             if($request->type_id == 2){
-                // dd($request->all());
                 Payments::create([
                     'reschedule_date' => $request->reschedule_date,
                     'client_id' => $request->client_id,
                     'amount' => $request->amount,
                     'type_id' => $request->type_id,
-                    'loan_id' => $request->loan_id
+                    'loan_id' => $request->loan_id,
+                    'cleared' => 0
                 ]);
               
                 return redirect()->route('loan.index')
                                 ->with(['success' => 'Payments Rescheduled successfully.']);
             }
-            $other = $request->all();
-            Payments::create($other);
+            Payments::create([
+                'client_id' => $request->client_id,
+                'amount' => $request->amount,
+                'type_id' => $request->type_id,
+                'loan_id' => $request->loan_id,
+                'cleared' => 0
+            ]);
             return redirect()->route('loan.index')
             ->with(['success' => 'Payments created successfully.']);
         
@@ -163,7 +175,6 @@ class PaymentsController extends Controller
     public function missed_payments()
     {
         $missed_payments = Payments::with(['client:id,full_name','type','loan:id,amount,balance,loan_type_id'])
-                                     ->whereDate('created_at',\Carbon\Carbon::now()->format('Y-m-d'))
                                      ->where('type_id',1)
                                      ->orderBy('id','DESC')
                                      ->get();
@@ -173,7 +184,6 @@ class PaymentsController extends Controller
     public function fine_payments()
     {
         $fine_payments = Payments::with(['client:id,full_name','type','loan:id,amount,balance,loan_type_id'])
-                                     ->whereDate('created_at',\Carbon\Carbon::now()->format('Y-m-d'))
                                      ->where('type_id',5)
                                      ->orderBy('id','DESC')
                                      ->get();
@@ -183,10 +193,36 @@ class PaymentsController extends Controller
     public function reschedule_payments()
     {
         $reschedule_payments = Payments::with(['client:id,full_name','type','loan:id,amount,balance,loan_type_id'])
-                                     ->whereDate('created_at',\Carbon\Carbon::now()->format('Y-m-d'))
                                      ->where('type_id',2)
                                      ->orderBy('id','DESC')
                                      ->get();
         return view('RescheduledPayments',compact('reschedule_payments'))->with('i');                             
+    }
+
+    public function normal_payments()
+    {
+        $normal_payments = Payments::with(['client:id,full_name','type','loan:id,amount,balance,loan_type_id'])
+                                     ->where('type_id',3)
+                                     ->orderBy('id','DESC')
+                                     ->get();
+        return view('NormalPayments',compact('normal_payments'))->with('i');                             
+    }
+
+    public function clear_payment()
+    {
+        $payment = Payments::find(request()->payment_id);
+        $loan = Loan::find(request()->loan_id);
+        $balance = $loan->balance - $payment->amount;
+        $paid = $payment->amount + $loan->amount_paid;
+
+        $loan->update([
+            'balance' => $balance,
+            'amount_paid' => $paid
+        ]);
+
+        $payment->update([
+            'cleared' => 1
+        ]);
+        return redirect()->back();
     }
 }

@@ -1,3 +1,11 @@
+@php
+    $today_payments = \App\Models\Payments::whereDate('created_at',\Carbon\Carbon::now()->format('Y-m-d'))
+                                            ->where('cleared',1)
+                                            ->sum('amount');
+    $all_payments = \App\Models\Payments::where('cleared',1)
+                                            ->sum('amount');                                         
+
+@endphp
 <!doctype html>
 <html lang="en">
 
@@ -45,10 +53,10 @@
                     <div class="col-md-3 p-2">
                         <div class="bg-white shadow-sm p-3" style="border-radius: 15px; height: 130px;">
                             <div class="d-flex" style="justify-content: space-between;">
-                                <p>Loans</p>
+                                <p>Today Payments</p>
                                 <i style="color: 041854;" class="bi bi-bank"></i>
                             </div><br/>
-                            <h4 style="color: #008ad3;">22</h4>
+                            <h4 style="color: #008ad3;">{{number_format($today_payments)}}</h4>
                         </div>
 
                     </div>
@@ -59,7 +67,7 @@
                                 <i style="color: 041854;" class="bi bi-bank"></i>
                             </div>
                             <br/>
-                            <h4 style="color: #008ad3;">22</h4>
+                            <h4 style="color: #008ad3;">{{number_format($all_payments)}}</h4>
                         </div>
 
                     </div>

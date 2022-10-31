@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="m-4">
                                     <label>Date of Birth</label>
-                                    <input type="date" name="date_of_birth" class="form-control mt-2" placeholder="date of birth" required>
+                                    <input type="date" name="date_of_birth" class="form-control mt-2" placeholder="date of birth">
                                 </div>
                                 <div class="m-4">
                                     <label>Place of Residence</label>
@@ -62,7 +62,7 @@
 
                                 <div class="m-4">
                                     <label>Second Contact</label>
-                                    <input type="text" name="contact2" class="form-control mt-2" placeholder="Enter Second Contact" required>
+                                    <input type="text" name="contact2" class="form-control mt-2" placeholder="Enter Second Contact">
                                 </div>
 
                                 <div class="m-4">
@@ -84,17 +84,17 @@
 
                                 <div class="m-4">
                                     <label>Guarantee Name</label>
-                                    <input type="text" class="form-control mt-2" name="guarantee_name" placeholder="Enter First Guarantee Name" required>
+                                    <input type="text" class="form-control mt-2" name="guarantee_name" placeholder="Enter First Guarantee Name">
                                 </div>
 
                                 <div class="m-4">
                                     <label>Guarantee Contact</label>
-                                    <input type="text" class="form-control mt-2" name="guarantee_contact" placeholder="Enter First Guarantee Contact" required>
+                                    <input type="text" class="form-control mt-2" name="guarantee_contact" placeholder="Enter First Guarantee Contact">
                                 </div>
                                
                                 <div class="m-4">
                                     <label>Spouse Name</label>
-                                    <input type="text" class="form-control mt-2" name="spouse_name" placeholder="Enter Spouse Name" required>
+                                    <input type="text" class="form-control mt-2" name="spouse_name" placeholder="Enter Spouse Name">
                                 </div>
 
                                 <div class="m-4">

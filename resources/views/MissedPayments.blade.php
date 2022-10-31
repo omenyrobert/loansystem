@@ -16,7 +16,7 @@
 <body>
     <div class="container-fluid" style="background-color: #bbd0d750;">
         @include('layouts.header')
-        
+
         <div class="d-flex">
             <div class="col-md-2">
                 @include('layouts.sidebar')
@@ -24,94 +24,101 @@
             <div class="col-md-10">
                 {{-- @include('layouts.cards') --}}
                 <div class="bg-white p-3 mt-2 shadow" style="border-radius: 15px; height: 70vh;">
-                    
-                         <h3 style="color: #008ad3; ">Missed Payments</h3>  
-                         {{-- <form>
-                            <div class="row mt-4 mb-5" style="width: 700px;">
-                                <div class="col-md-4">
-                                 <label>Start Date</label>
-                                 <input type="date" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <label>End Date</label>
-                                    <input type="date" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary mt-4">Generate</button>
-        
-                                </div>
-        
-                            </div>
-                        </form> --}}
-                         <table class="table mt-3">
-                            <thead style="background-color: #bbd0d750; color: #008ad3;">
-                              <th>No</th>
-                              <th>Client</th>
-                              <th>Loan Type</th>
-                              <th>Amount Missed(UGX)</th>
-                              <th>Amount(UGX)</th>
-                              <th>Balance(UGX)</th>
-                              <th>Time</th>
-                              <th>Date</th>
-                              <th>Action</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($missed_payments as $item)
+
+                    <h3 style="color: #008ad3; ">Missed Payments</h3>
+                    <a href="{{ route('payment.record.missed') }}" class="text-decoration-none btn btn-primary">Record
+                        Missed</a>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    <table class="table mt-3">
+                        <thead style="background-color: #bbd0d750; color: #008ad3;">
+                            <th>No</th>
+                            <th>Client</th>
+                            <th>Loan Type</th>
+                            <th>Amount Missed(UGX)</th>
+                            <th>Amount(UGX)</th>
+                            <th>Balance(UGX)</th>
+                            <th>Time</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($missed_payments as $item)
                                 <tr>
 
-                                    <td>{{++$i}}</td>
-                                    <td>{{$item->client->full_name}}</td>
-                                    <td>{{\App\Models\LoanType::find($item->loan->loan_type_id)->type}}</td>
-                                    <td>{{number_format($item->amount)}}</td>
-                                    <td>{{number_format($item->loan->amount)}}</td>
-                                    <td>{{number_format($item->loan->balance)}}</td>
-                                    <td>{{$item->created_at->format('h:i A')}}</td>                                                                    
-                                    <td>{{$item->created_at->format('d-m-Y')}}</td>
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $item->client->full_name }}</td>
+                                    <td>{{ \App\Models\LoanType::find($item->loan->loan_type_id)->type }}</td>
+                                    <td>{{ number_format($item->amount) }}</td>
+                                    <td>{{ number_format($item->loan->amount) }}</td>
+                                    <td>{{ number_format($item->loan->balance) }}</td>
+                                    <td>{{ $item->created_at->format('h:i A') }}</td>
+                                    <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                     <td>
                                         @if ($item->cleared == 0)
-                                        <p style="margin-left: 20px;" class="text-danger" role="button"
-                                        data-bs-toggle="modal" data-bs-target="#pay">Clear</p>
+                                            <p style="margin-left: 20px;" class="text-danger" role="button"
+                                                data-bs-toggle="modal" data-bs-target="#pay">Clear</p>
                                         @else
-                                        <p style="margin-left: 20px;" class="text-success" role="button"
-                                        >Cleared</p>
+                                            <p style="margin-left: 20px;" class="text-success" role="button">Cleared
+                                            </p>
                                         @endif
-                                       </td>
+                                    </td>
                                 </tr>
                                 <div class="modal fade" id="pay" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('payment.clear') }}" method="POST">
-                                            @csrf
-                                            <div class="modal-header bg-primary">
-                                                <h5 class="modal-title text-white" id="exampleModalLabel">Clear
-                                                    Payment</h5>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body px-5">
-                                                <p>Are You sure you to Clear this Payment of UGX {{$item->amount}}?</p>
-                                                <input type="hidden" value="{{$item->id}}" name="payment_id">
-                                                <input type="hidden" value="{{$item->loan->id}}" name="loan_id">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Clear
-                                                    Payment</button>
-                                            </div>
-                                        </form>
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="{{ route('payment.clear') }}" method="POST">
+                                                @csrf
+                                                <div class="modal-header bg-primary">
+                                                    <h5 class="modal-title text-white" id="exampleModalLabel">Clear
+                                                        Payment</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body px-5">
+                                                    <p>Are You sure you to Clear this Payment of UGX
+                                                        {{ $item->amount }}?</p>
+                                                    <input type="hidden" value="{{ $item->id }}"
+                                                        name="payment_id">
+                                                    <input type="hidden" value="{{ $item->loan->id }}" name="loan_id">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Clear
+                                                        Payment</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                                @endforeach
-                            </tbody>
-                          </table>  
-                          @if (count($missed_payments) == 0)
-                          <p>No Missed Payments Recorded today</p>
-                       @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @if (count($missed_payments) == 0)
+                        <p>No Missed Payments Recorded today</p>
+                    @endif
 
-                    
+
                 </div>
 
             </div>

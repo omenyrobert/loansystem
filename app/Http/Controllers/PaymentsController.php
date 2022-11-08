@@ -293,49 +293,66 @@ class PaymentsController extends Controller
         ]);
         return redirect()->back();
     }
+    public function clear_reschedule(){
+        $payment = Payments::find(request()->payment_id);
+        $loan = Loan::find(request()->loan_id);
+        $balance = $loan->balance - request()->amount;
+        $paid = $loan->amount_paid + request()->amount;
+        $loan->update([
+            'balance' => $balance,
+            'amount_paid' => $paid
+        ]);
+        if($loan->balance == 0){
+            $payment->update([
+                'cleared' => 1
+            ]);
+        }else {
+            $payment->update([
+                'amount' => $payment->amount - request()->amount,
+            ]);
+        }
+        return redirect()->back();
+    }
+
     public function auto_missed_payments_record()
     {
         try {
-            $yesterday_payments = Payments::whereDate('created_at',\Carbon\Carbon::yesterday()->format('Y-m-d'))
-                                            ->where('type_id',1)
-                                            ->get();
-            $today_payments = Payments::whereDate('created_at',\Carbon\Carbon::now()->format('Y-m-d'))
-                                            ->where('type_id',1)
-                                            ->get();                               
-            if((count($yesterday_payments) > 0) || (count($today_payments) > 0)){
-                return redirect()->route('payment.missed')->with([
-                    'error' => 'Missed Payments Recorded already'
-                ]); 
-            }                                
+
             $unpaid_loans = Loan::where('balance','>',0)->get();
 
-            $unmade_payments = [];
-
             foreach($unpaid_loans as $loan){
-                $check_if_paid = Payments::where('created_at',\Carbon\Carbon::yesterday())
-                                           ->where('loan_id',$loan->id)
-                                           ->where('cleared',1)
-                                           ->first();
-                if(is_null($check_if_paid)){
-                    $unmade_payments[] = $loan;
-                }                           
-            }
+                $peroid = \Carbon\CarbonPeriod::create($loan->created_at->format('Y-m-d'),Carbon::now()->format('Y-m-d'));
+                foreach($peroid->toArray() as $date){
+                    $normal_payment = Payments::where('loan_id',$loan->id)
+                                       ->where('type_id',3)->whereDate('created_at',$date)
+                                       ->first();
+                    $missed_payment = Payments::where('loan_id',$loan->id)
+                                       ->where('type_id',1)->whereDate('created_at',$date)
+                                       ->first();  
+                    if(is_null($normal_payment) && is_null($missed_payment)){
+                        Payments::insert([
+                            'amount' => 20000,
+                            'type_id' => 1,
+                            'client_id' => $loan->client_id,
+                            'cleared' => 0,
+                            'loan_id' => $loan->id,
+                            'created_at' => $date,
+                            'updated_at' => $date
+                        ]);
+                    }                                   
+                }
 
-            foreach($unmade_payments as $payment){
-                Payments::create([
-                    'client_id' => $payment->client_id,
-                    'amount' => 20000,
-                    'type_id' => 1,
-                    'loan_id' => $payment->id,
-                    'cleared' => 0
-                ]);
             }
-            return redirect()->route('payment.missed')->with([
-                'sucsess' => 'Recorded Successfully'
-            ]);    
+            return redirect()->route('payment.missed');
+   
         } catch (\Throwable $th) {
             return $th->getMessage();
         }                       
                                      
+    }
+
+    public function print($id){
+        $print_data = Payments::with(['client','loan'])->where('id',$id)->first();
+        return view('receipt', compact('print_data'));
     }
 }

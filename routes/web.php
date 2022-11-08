@@ -52,6 +52,7 @@ Route::prefix('payment')->group(function(){
     Route::get('/record-missed',[PaymentsController::class,'auto_missed_payments_record'])->name('payment.record.missed');
     Route::get('/reschedule-payments',[PaymentsController::class ,'reschedule_payments'])->name('payment.reschedule');
     Route::post('/clear-payment',[PaymentsController::class,'clear_payment'])->name('payment.clear');
+    Route::post('/clear-reschedule',[PaymentsController::class,'clear_reschedule'])->name('payment.clear.reschedule');
 });
 
 // end of clients routes
@@ -59,4 +60,6 @@ Route::prefix('payment')->group(function(){
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/print/{id}', [PaymentsController::class,'print'])->name('print');
 

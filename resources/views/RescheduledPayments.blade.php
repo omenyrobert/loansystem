@@ -66,7 +66,7 @@
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="{{ route('payment.clear') }}" method="POST">
+                                        <form action="{{ route('payment.clear.reschedule') }}" method="POST">
                                             @csrf
                                             <div class="modal-header bg-primary">
                                                 <h5 class="modal-title text-white" id="exampleModalLabel">Clear
@@ -75,15 +75,16 @@
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body px-5">
-                                                <p>Are You sure you to Clear this Payment of UGX {{$item->amount}}?</p>
+                                                <input type="number" class="form-control"
+                                                placeholder="Enter Amount" name="amount" required>
                                                 <input type="hidden" value="{{$item->id}}" name="payment_id">
                                                 <input type="hidden" value="{{$item->loan->id}}" name="loan_id">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Clear
-                                                    Payment</button>
+                                                <button type="submit" class="btn btn-primary">Save
+                                              </button>
                                             </div>
                                         </form>
                                     </div>
@@ -109,6 +110,8 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+    {{-- sudo /etc/init.d/mysql stop --}}
 
 </body>
 

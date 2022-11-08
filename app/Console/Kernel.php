@@ -4,7 +4,6 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\MissedPaymentRecord;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,8 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command(MissedPaymentRecord::class)->everyMinute();
+        $schedule->command('record:missed-payments')->everyMinute();
     }
 
     /**

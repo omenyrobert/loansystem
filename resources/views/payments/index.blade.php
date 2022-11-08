@@ -76,9 +76,15 @@
                                         <td>{{ \App\Models\LoanType::find($payment->loan->loan_type_id)->type }}</td>
                                         <td>{{ $payment->created_at->format('h:i A') }}</td>
                                         <td>{{ $payment->created_at->format('d-m-Y') }}</td>
-                                        <td><div class="d-flex"> <a href="{{ route('loan.edit',$payment->id) }}"><i class="bi bi-pencil m-1 text-warning"></i> </a>
+                                        <td><div class="d-flex"> 
+                                            <a href="{{ route('loan.edit',$payment->id) }}"><i class="bi bi-pencil m-1 text-warning"></i> </a>
+                                            
                                             {{-- <form action="{{ route('loan.destroy',$payment->id) }}" method="POST"> @csrf<button type="submit" style="margin-top: -5px;" class="btn btn-default"> <i class="bi bi-trash-fill m-1 text-danger"></i></button></form> --}}
-                                             <a href="{{ route('loan.show',$payment->id) }}"> <i class="bi bi-eye-fill m-1 text-primary"></i></a></div></td>
+                                             <a href="#"> <i class="bi bi-eye-fill m-1 text-primary"></i></a>
+                                             <a href="{{url('/print/'.$payment->id)}}"> <i class="bi bi-printer-fill m-1 text-primary"></i></a></div>
+                                            </div>
+                                        </td>
+                                             
                                         </td>
                                     </tr>
                                     @endforeach
@@ -125,5 +131,31 @@
     <!-- Option 2: Separate Popper and Bootstrap JS -->
 
 </body>
+<script>
+    $(document).ready(function(){
 
+    // Search all columns
+    $('#search').keyup(function(){
+        var search = $(this).val();
+
+        $('table tbody tr').hide();
+
+        var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+        if(len > 0){
+          $('table tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+              $(this).closest('tr').show();
+          });
+        }else{
+          $('.notfound').show();
+        }
+        
+    });
+});
+  $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+});
+</script>
 </html>

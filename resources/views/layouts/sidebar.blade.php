@@ -8,10 +8,10 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <title>Loan System</title>
+    <title>Church System</title>
   </head>
   <body>
-   <div class="p-3" style="height: 100vh; position: fixed; overflow-y: auto; width:230px; color: #fff; background-color: #041854; border-radius: 10px;">
+   <div class="p-3" style="height: 100vh; position: fixed; overflow-y: auto; width:200px; color: #fff; background-color: #047cde; border-radius: 10px;">
    
     <a href="{{ url('/dashboard') }}" class="d-flex text-white text-decoration-none"   style="justify-content: space-between;">
     <div class="d-flex">
@@ -21,70 +21,56 @@
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ url('/clients') }}" class="d-flex text-white text-decoration-none" style="justify-content: space-between;">
+<a href="{{ url('/members') }}" class="d-flex text-white text-decoration-none" style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-people"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Clients</p>
+        <i class="bi bi-people"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Members</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ url('/loans') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+<a href="{{ route('income.index') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-people"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Loans</p>
+        <i class="bi bi-people"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Incomes</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ route('payment.all') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+<a href="{{ route('income_type.index') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">All Payments</p>
+        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Income Types</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ route('payment.today') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+<a href="{{ route('expense.index') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">All Today Payments</p>
+        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Expenses</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ route('payment.missed') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+<a href="{{ route('expense_type.index') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Missed Payments</p>
+        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Expense Types</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ route('payment.fine') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
+
+<a href="{{ route('report.index') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
     <div class="d-flex">
-        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Fine Payments</p>
+        <i class="bi bi-file-earmark-bar-graph"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Report</p>
     </div>
     <div>
     <i  class="bi bi-arrow-right"></i>
     </div>
 </a>
-<a href="{{ route('payment.reschedule') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
-    <div class="d-flex">
-        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Rescheduled Payments</p>
-    </div>
-    <div>
-    <i  class="bi bi-arrow-right"></i>
-    </div>
-</a>
-<a href="{{ route('payment.normal') }}" class="d-flex text-white text-decoration-none"  style="justify-content: space-between;">
-    <div class="d-flex">
-        <i class="bi bi-wallet2"></i><p  style="margin-left: 10px; font-size: 14px; font-weight:300;">Normal Payments</p>
-    </div>
-    <div>
-    <i  class="bi bi-arrow-right"></i>
-    </div>
-</a>
+
    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('client_id');
             $table->integer('loan_id');
             $table->bigInteger('amount');
+            $table->boolean('cleared')->nullable();
             $table->timestamps();
         });
     }

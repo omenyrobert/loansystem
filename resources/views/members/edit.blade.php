@@ -10,11 +10,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <title>Loan System</title>
+    <title>Church System</title>
 </head>
 
 <body>
-    <div class="container-fluid" style="background-color: #bbd0d750;">
+    <div class="container-fluid" style="background-color: #bbd0d750; height: 120vh;">
         @include('layouts.header')
         <div class="d-flex">
             <div class="col-md-2">
@@ -36,42 +36,43 @@
         </ul>
     </div>
 @endif
-                    <form action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('client.update', $client->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="row mt-5 p-1">
                             <div class="col-md-6">
                                 <div class="m-4">
                                     <label>Full Name</label>
-                                    <input type="text" name="full_name" class="form-control mt-2" placeholder="Full Name" required>
+                                    <input type="text" name="full_name" value="{{ $client->full_name }}" class="form-control mt-2" placeholder="Full Name" required>
                                 </div>
                                 <div class="m-4">
                                     <label>Date of Birth</label>
-                                    <input type="date" name="date_of_birth" class="form-control mt-2" placeholder="date of birth">
+                                    <input type="date" value="{{ $client->date_of_birth }}" name="date_of_birth" class="form-control mt-2" placeholder="date of birth">
                                 </div>
                                 <div class="m-4">
                                     <label>Place of Residence</label>
-                                    <input type="text" class="form-control mt-2" name="place_of_residence" placeholder="Enter Place of Residence" required>
+                                    <input type="text" value="{{ $client->place_of_residence }}" class="form-control mt-2" name="place_of_residence" placeholder="Enter Place of Residence">
                                 </div>
 
                                
 
                                 <div class="m-4">
                                     <label>First Contact</label>
-                                    <input type="text" name="contact1" class="form-control mt-2" placeholder="Enter First Contacts" required>
+                                    <input type="text" value="{{ $client->contact1 }}" name="contact1" class="form-control mt-2" placeholder="Enter First Contacts" required>
                                 </div>
 
                                 <div class="m-4">
                                     <label>Second Contact</label>
-                                    <input type="text" name="contact2" class="form-control mt-2" placeholder="Enter Second Contact">
+                                    <input type="text" value="{{ $client->contact2 }}" name="contact2" class="form-control mt-2" placeholder="Enter Second Contact">
                                 </div>
 
                                 <div class="m-4">
                                     <label>Photo</label>
-                                    <input type="file" class="form-control mt-2" name="photo" placeholder="Photo">
+                                    <input type="text" value="{{ $client->photo }}" class="form-control mt-2" name="photo" placeholder="Photo">
                                 </div>
                                 <div class="m-4">
                                     <label>Contract</label>
-                                    <input type="file" class="form-control mt-2" name="contract" placeholder="Contract">
+                                    <input type="text" value="{{ $client->date_of_birth }}" class="form-control mt-2" name="contract" placeholder="Contract">
                                 </div>
 
 
@@ -79,30 +80,30 @@
                             <div class="col-md-6">
                                 <div class="m-4">
                                     <label>Boda Stage</label>
-                                    <input type="text" name="boda_stage" class="form-control mt-2" placeholder="Enter Boda Stage" required>
+                                    <input type="text" value=" {{ $client->boda_stage }}" name="boda_stage" class="form-control mt-2" placeholder="Enter Boda Stage">
                                 </div>
 
                                 <div class="m-4">
                                     <label>Guarantee Name</label>
-                                    <input type="text" class="form-control mt-2" name="guarantee_name" placeholder="Enter First Guarantee Name">
+                                    <input type="text" value=" {{ $client->guarantee_name }}" class="form-control mt-2" name="guarantee_name" placeholder="Enter First Guarantee Name">
                                 </div>
 
                                 <div class="m-4">
                                     <label>Guarantee Contact</label>
-                                    <input type="text" class="form-control mt-2" name="guarantee_contact" placeholder="Enter First Guarantee Contact">
+                                    <input type="text" value="{{ $client->guarantee_contact }}" class="form-control mt-2" name="guarantee_contact" placeholder="Enter First Guarantee Contact">
                                 </div>
                                
                                 <div class="m-4">
                                     <label>Spouse Name</label>
-                                    <input type="text" class="form-control mt-2" name="spouse_name" placeholder="Enter Spouse Name">
+                                    <input type="text" value="{{ $client->spouse_name }}" class="form-control mt-2" name="spouse_name" placeholder="Enter Spouse Name">
                                 </div>
 
                                 <div class="m-4">
                                     <label>Spouse Contact</label>
-                                    <input type="text" class="form-control mt-2" name="spouse_contact" placeholder="Enter spouse Contact" required>
+                                    <input type="text" value="{{ $client->spouse_contact }}" class="form-control mt-2" name="spouse_contact" placeholder="Enter spouse Contact">
                                 </div>
                                 <div class="m-4">
-                                    <button type="submit" class="btn btn-primary form-control">Register</button>
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
                                 </div>
 
                             </div>

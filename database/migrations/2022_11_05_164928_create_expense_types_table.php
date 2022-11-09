@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->boolean('cleared')->default(false)->nullable();
+        Schema::create('expense_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('expense_type');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->dropColumn('cleared');
-        });
+        Schema::dropIfExists('expense_types');
     }
 };

@@ -5,13 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PaymentType extends Model
+class IncomeTypes extends Model
 {
     use HasFactory;
-
-    protected $table = 'payment_types';
-
-    protected $fillable = [
-        'type'
-    ];
+    protected $table = 'income_types';
+    
+    protected $fillable = ['income_type'];
 }

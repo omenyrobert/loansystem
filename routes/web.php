@@ -1,10 +1,14 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoanController;
-use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\ExpenseTypesController;
+use App\Http\Controllers\ExpensesController;
+use App\Http\Controllers\IncomeTypesController;
+use App\Http\Controllers\IncomesController;
+use App\Http\Controllers\ReportsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,15 +26,15 @@ Route::get('/', function () {
 
 Route::post('/login',[LoginController::class,'login'])->name('login');
 
-// clients routes
-Route::prefix('clients')->group(function(){
-    Route::get('/', [ClientController::class, 'index'])->name('client.index');
-    Route::post('/store', [ClientController::class, 'store'])->name('client.store');
-    Route::get('/show/{client}', [ClientController::class, 'show'])->name('client.show');
-    Route::get('/edit/{client}', [ClientController::class, 'edit'])->name('client.edit');
-    Route::put('/update/{client}', [ClientController::class, 'update'])->name('client.update');
-    Route::post('/destroy/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
-    Route::get('/create',[ClientController::class,'create'])->name('client.create');
+// members routes
+Route::prefix('members')->group(function(){
+    Route::get('/', [MemberController::class, 'index'])->name('member.index');
+    Route::post('/store', [MemberController::class, 'store'])->name('member.store');
+    Route::get('/show/{id}', [MemberController::class, 'show'])->name('member.show');
+    Route::get('/edit/{member}', [MemberController::class, 'edit'])->name('member.edit');
+    Route::put('/update/{member}', [MemberController::class, 'update'])->name('member.update');
+    Route::post('/destroy/{member}', [MemberController::class, 'destroy'])->name('member.destroy');
+    Route::get('/create',[MemberController::class,'create'])->name('member.create');
 });
 
 Route::prefix('loans')->group(function(){
@@ -39,7 +43,6 @@ Route::prefix('loans')->group(function(){
     Route::get('/show/{loan}', [LoanController::class, 'show'])->name('loan.show');
     Route::get('/edit/{loan}', [LoanController::class, 'edit'])->name('loan.edit');
     Route::put('/update/{loan}', [LoanController::class, 'update'])->name('loan.update');
-    Route::post('/destroy/{loan}', [LoanController::class, 'destroy'])->name('loan.destroy');
 });
 Route::prefix('payment')->group(function(){
     Route::post('/store', [PaymentsController::class, 'store'])->name('payment.store');
@@ -55,7 +58,42 @@ Route::prefix('payment')->group(function(){
     Route::post('/clear-reschedule',[PaymentsController::class,'clear_reschedule'])->name('payment.clear.reschedule');
 });
 
-// end of clients routes
+Route::prefix('expense_type')->group(function(){
+    Route::get('/', [ExpenseTypesController::class, 'index'])->name('expense_type.index');
+    Route::post('/', [ExpenseTypesController::class, 'store'])->name('expense_type.store');
+    Route::put('/update', [ExpenseTypesController::class, 'update'])->name('expense_type.update');
+    Route::post('/destroy/{expense_type}', [ExpenseTypesController::class, 'destroy'])->name('expense_type.destroy');
+});
+
+
+Route::prefix('income_type')->group(function(){
+    Route::get('/', [IncomeTypesController::class, 'index'])->name('income_type.index');
+    Route::post('/', [IncomeTypesController::class, 'store'])->name('income_type.store');
+    Route::put('/update', [IncomeTypesController::class, 'update'])->name('income_type.update');
+    Route::post('/destroy/{income_type}', [IncomeTypesController::class, 'destroy'])->name('income_type.destroy');
+});
+
+Route::prefix('income')->group(function(){
+    Route::get('/', [IncomesController::class, 'index'])->name('income.index');
+    Route::post('/', [IncomesController::class, 'store'])->name('income.store');
+    Route::put('/update', [IncomesController::class, 'update'])->name('income.update');
+    Route::post('/destroy/{income}', [IncomesController::class, 'destroy'])->name('income.destroy');
+});
+
+Route::prefix('expense')->group(function(){
+    Route::get('/', [ExpensesController::class, 'index'])->name('expense.index');
+    Route::post('/', [ExpensesController::class, 'store'])->name('expense.store');
+    Route::put('/update', [ExpensesController::class, 'update'])->name('expense.update');
+    Route::post('/destroy/{expense}', [ExpensesController::class, 'destroy'])->name('expense.destroy');
+});
+
+Route::prefix('report')->group(function(){
+    Route::get('/', [ReportsController::class, 'index'])->name('report.index');
+   
+});
+
+
+// end of members routes
 
 Route::get('/dashboard', function () {
     return view('dashboard');

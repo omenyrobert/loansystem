@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Loan System</title>
+    <title>Church System</title>
     <style>
         #icons{
             background-color: #008ad3;
@@ -30,7 +30,7 @@
    <div class="container-fluid sticky-top p-3" id="heada">
     <div class="row">
       <div class="col-md-2">
-logo
+      <h4 class="text-primary text-center">Church System</h4>
       </div>
       <div class="col-md-8">
 <input type="text" class="form-control bg-white" style="border-radius: 50px; width: 60%;">
